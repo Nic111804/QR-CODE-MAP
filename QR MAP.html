@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NORSU Digital Map</title>
+
+<style>
+/* ================= GENERAL ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    touch-action: manipulation; /* for mobile touch */
+}
+
+body {
+    background: linear-gradient(to bottom, #0d4f84, #cfd3d6);
+    color: #333;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* ================= PAGE TRANSITIONS ================= */
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 80px 20px 40px 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================= LOGO ================= */
+.logo {
+    width: 120px;
+    margin-bottom: 20px;
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: scale(1.2) rotate(-10deg);
+}
+
+/* ================= HEADINGS ================= */
+h1 {
+    font-size: 60px;
+    font-weight: 900;
+    color: #555;
+    -webkit-text-stroke: 2px white;
+    animation: fadeInDown 1s ease forwards;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    -webkit-text-stroke: 1.5px white;
+    margin-bottom: 15px;
+    animation: fadeInUp 1s ease forwards;
+}
+
+h3 {
+    font-size: 25px;
+    margin: 20px 0;
+}
+
+/* ================= PARAGRAPHS ================= */
+p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+/* ================= BUTTONS ================= */
+button {
+    padding: 15px 35px;
+    border: none;
+    border-radius: 30px;
+    background: #0d4f84;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover {
+    background: #08375b;
+    transform: scale(1.1) translateY(-2px);
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255,255,255,0.15);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+}
+
+button:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.campus-btn {
+    display: block;
+    width: 80%;
+    max-width: 280px;
+    margin: 20px auto;
+}
+
+/* ================= MAP ================= */
+.map {
+    width: 95%;
+    max-width: 900px;
+    margin-top: 25px;
+    border-radius: 15px;
+    transition: transform 0.4s ease;
+}
+
+.map:hover {
+    transform: scale(1.05);
+}
+
+/* ================= BACK BUTTON ================= */
+.back-btn {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 16px;
+    padding: 8px 18px;
+    transition: 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #08375b;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* ================= MENU ICON ================= */
+.menu-btn {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    font-size: 32px;
+    cursor: pointer;
+    z-index: 1000;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.menu-btn:hover {
+    transform: rotate(90deg);
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100%;
+    background: white;
+    padding: 25px;
+    transition: right 0.5s ease;
+    box-shadow: -5px 0px 15px rgba(0,0,0,0.2);
+    z-index: 999;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-header {
+    text-align: right;
+    font-size: 26px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header:hover {
+    transform: rotate(-10deg);
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 20px 0;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+    color: #0d4f84;
+    transform: translateX(5px);
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInDown {
+    0% {opacity:0; transform: translateY(-20px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+@keyframes fadeInUp {
+    0% {opacity:0; transform: translateY(20px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:600px){
+    h1{ font-size: 40px; }
+    h2{ font-size: 28px; }
+    h3{ font-size: 20px; }
+    .logo{ width: 90px; }
+    button{ width: 90%; font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- MENU ICON -->
+<div class="menu-btn" onclick="toggleSidebar()">☰</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header" onclick="toggleSidebar()">←</div>
+    <a href="#" onclick="goToPage('page1')">Home</a>
+    <a href="#" onclick="goToPage('page2')">Campuses</a>
+</div>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page active" id="page1">
+    <img src="norsulogo.png" class="logo">
+    <h1>WELCOME TO</h1>
+    <h2>NORSU DIGITAL MAP</h2>
+    <p>NEGROS ORIENTAL STATE UNIVERSITY</p>
+    <p>MAIN CAMPUS 1 & 2</p>
+    <button onclick="goToPage('page2')">CLICK TO START</button>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page" id="page2">
+    <button class="back-btn" onclick="goToPage('page1')">← Back</button>
+    <img src="norsulogo.png" class="logo">
+    <h2>NORSU DIGITAL MAP</h2>
+    <p>NEGROS ORIENTAL STATE UNIVERSITY</p>
+    <p>MAIN CAMPUS 1 & 2</p>
+
+    <h3>Where is your campus?</h3>
+
+    <button class="campus-btn" onclick="goToPage('page3')">MAIN CAMPUS 1</button>
+    <p>Or</p>
+    <button class="campus-btn" onclick="goToPage('page4')">MAIN CAMPUS 2</button>
+
+    <p>Select your Campus!</p>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page" id="page3">
+    <button class="back-btn" onclick="goToPage('page2')">← Back</button>
+    <img src="norsulogo.png" class="logo">
+    <h2>NORSU DIGITAL MAP</h2>
+    <p>NORSU CAMPUS 1 KAGAWASAN AVENUE, DUMAGUETE CITY</p>
+    <h3>MAIN CAMPUS 1</h3>
+    <img src="campus1.png" class="map">
+</div>
+
+<!-- ================= PAGE 4 ================= -->
+<div class="page" id="page4">
+    <button class="back-btn" onclick="goToPage('page2')">← Back</button>
+    <img src="norsulogo.png" class="logo">
+    <h2>NORSU DIGITAL MAP</h2>
+    <p>NORSU MAIN CAMPUS 2 BRGY. BAJUMPANDAN, DUMAGUETE CITY</p>
+    <h3>MAIN CAMPUS 2</h3>
+    <img src="MC2 MAP.png" class="map">
+</div>
+
+<script>
+// ================= PAGE NAVIGATION =================
+function goToPage(pageId){
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
+
+    // Close sidebar automatically
+    document.getElementById('sidebar').classList.remove('active');
+}
+
+// ================= SIDEBAR TOGGLE =================
+function toggleSidebar(){
+    document.getElementById('sidebar').classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
