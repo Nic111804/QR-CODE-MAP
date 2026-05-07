@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Campus Navigator – NORSU</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="day-mode">
+ 
+  <!-- ===== INTRO SCREEN ===== -->
+  <div id="intro-screen" class="screen active">
+    <div class="intro-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-glow"></div>
+    </div>
+    <div class="intro-content">
+      <div class="logo-wrap">
+        <div class="logo-ring ring1"></div>
+        <div class="logo-ring ring2"></div>
+        <div class="logo-circle">
+          <svg viewBox="0 0 120 120" width="90" height="90" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="55" fill="#003087" stroke="#FFD700" stroke-width="3"/>
+            <circle cx="60" cy="60" r="45" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+            <!-- Torch -->
+            <rect x="56" y="30" width="8" height="30" rx="2" fill="#FFD700"/>
+            <ellipse cx="60" cy="28" rx="7" ry="10" fill="#FF8C00"/>
+            <ellipse cx="60" cy="25" rx="4" ry="7" fill="#FFD700"/>
+            <!-- Book -->
+            <rect x="42" y="65" width="36" height="22" rx="2" fill="white"/>
+            <line x1="60" y1="65" x2="60" y2="87" stroke="#003087" stroke-width="1.5"/>
+            <!-- Laurels -->
+            <path d="M40 75 Q35 65 38 58" stroke="#FFD700" fill="none" stroke-width="2"/>
+            <path d="M80 75 Q85 65 82 58" stroke="#FFD700" fill="none" stroke-width="2"/>
+            <!-- Stars -->
+            <polygon points="60,50 61.5,54.5 66,54.5 62.5,57 63.5,61.5 60,59 56.5,61.5 57.5,57 54,54.5 58.5,54.5" fill="#FFD700" transform="scale(0.6) translate(40,28)"/>
+          </svg>
+        </div>
+      </div>
+      <h1 class="uni-name">NEGROS ORIENTAL<br>STATE UNIVERSITY</h1>
+      <p class="uni-address">Kagawasan Avenue, Dumaguete City</p>
+      <p class="app-tagline">Campus Navigator</p>
+      <button class="btn-primary btn-continue" onclick="showCampusSelect()">
+        <span>CONTINUE</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+    </div>
+  </div>
+ 
+  <!-- ===== CAMPUS SELECT SCREEN ===== -->
+  <div id="campus-select" class="screen">
+    <div class="select-header">
+      <div class="header-logo-small">
+        <div class="logo-dot"></div>
+        <span>NORSU Navigator</span>
+      </div>
+      <button class="btn-mode-toggle" onclick="toggleMode()" title="Toggle Day/Night">
+        <svg id="mode-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="mode-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+ 
+    <div class="select-content">
+      <h2 class="select-title">Select Campus</h2>
+      <p class="select-sub">Choose a campus to start navigating</p>
+      <div class="campus-cards">
+        <div class="campus-card" onclick="openCampus(1)">
+          <div class="card-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="card-info">
+            <h3>Main Campus 1</h3>
+            <p>Kagawasan Avenue<br>Dumaguete City</p>
+            <div class="card-badges">
+              <span class="badge">4 Gates</span>
+              <span class="badge">Central Campus</span>
+            </div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+        <div class="campus-card" onclick="openCampus(2)">
+          <div class="card-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="card-info">
+            <h3>Main Campus 2</h3>
+            <p>Brgy. Bajumpandan<br>Dumaguete City</p>
+            <div class="card-badges">
+              <span class="badge">1 Gate</span>
+              <span class="badge">Extended Campus</span>
+            </div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ===== CAMPUS 1 MAP SCREEN ===== -->
+  <div id="campus1-screen" class="screen">
+    <div class="map-header">
+      <button class="btn-back" onclick="goBack()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <div class="map-title-wrap">
+        <span class="map-campus-label">NORSU</span>
+        <h2>Main Campus 1</h2>
+      </div>
+      <div class="header-actions">
+        <button class="btn-icon" onclick="toggleSearch()" title="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="btn-mode-toggle" onclick="toggleMode()">
+          <svg id="mode-icon-sun2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg id="mode-icon-moon2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+ 
+    <!-- Search Panel -->
+    <div id="search-panel" class="search-panel hidden">
+      <input type="text" id="search-input1" class="search-input" placeholder="Search buildings..." oninput="searchBuilding(1, this.value)" />
+      <div id="search-results1" class="search-results"></div>
+    </div>
+ 
+    <!-- Navigation Controls -->
+    <div class="nav-controls" id="nav-controls1">
+      <div class="control-row">
+        <label>From (Gate)</label>
+        <select id="start-gate1" onchange="updateRoute(1)">
+          <option value="">Select Starting Gate</option>
+          <option value="gate1">Gate 1 – Main Entrance</option>
+          <option value="gate2">Gate 2 – Side Entrance</option>
+          <option value="gate3">Gate 3 – Back Gate</option>
+          <option value="gate4">Gate 4 – Service Gate</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label>To (Building)</label>
+        <select id="dest-building1" onchange="updateRoute(1)">
+          <option value="">Select Destination</option>
+          <option value="admin">Administration Building</option>
+          <option value="cit">College of Industrial Technology</option>
+          <option value="cas">College of Arts & Sciences</option>
+          <option value="cba">College of Business Administration</option>
+          <option value="coed">College of Education</option>
+          <option value="nursing">College of Nursing</option>
+          <option value="engineering">College of Engineering</option>
+          <option value="library">University Library</option>
+          <option value="gym">Gymnasium</option>
+          <option value="chapel">Chapel</option>
+          <option value="canteen">Main Canteen</option>
+          <option value="registrar">Registrar's Office</option>
+          <option value="clinic">Health & Wellness Center</option>
+          <option value="dormitory">Dormitory</option>
+          <option value="amphitheater">Amphitheater</option>
+        </select>
+      </div>
+      <button class="btn-navigate" id="btn-nav1" onclick="startNavigation(1)" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22l10-5 10 5z"/></svg>
+        Navigate
+      </button>
+    </div>
+ 
+    <!-- Map Container Campus 1 -->
+    <div class="map-container" id="map1-container">
+      <div class="map-zoom-controls">
+        <button onclick="zoom(1, 1.2)">+</button>
+        <button onclick="zoom(1, 0.8)">−</button>
+        <button onclick="resetZoom(1)" title="Reset">⌂</button>
+      </div>
+      <div class="map-wrap" id="map1-wrap">
+        <svg id="campus1-map" viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- Campus 1 SVG content injected by JS -->
+        </svg>
+      </div>
+    </div>
+ 
+    <!-- Voice Guidance Box -->
+    <div class="voice-box hidden" id="voice-box1">
+      <div class="voice-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      </div>
+      <p id="voice-text1">Ready to navigate.</p>
+    </div>
+ 
+    <!-- Building Info Popup -->
+    <div class="building-popup hidden" id="building-popup1">
+      <button class="popup-close" onclick="closePopup(1)">✕</button>
+      <div class="popup-icon">🏛️</div>
+      <h3 id="popup-name1">Building Name</h3>
+      <p id="popup-desc1">Building description</p>
+      <button class="btn-set-dest" onclick="setAsDestination(1)">Set as Destination</button>
+    </div>
+  </div>
+ 
+  <!-- ===== CAMPUS 2 MAP SCREEN ===== -->
+  <div id="campus2-screen" class="screen">
+    <div class="map-header">
+      <button class="btn-back" onclick="goBack()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <div class="map-title-wrap">
+        <span class="map-campus-label">NORSU</span>
+        <h2>Main Campus 2</h2>
+      </div>
+      <div class="header-actions">
+        <button class="btn-icon" onclick="toggleSearch()" title="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="btn-mode-toggle" onclick="toggleMode()">
+          <svg id="mode-icon-sun3" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg id="mode-icon-moon3" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+ 
+    <!-- Search Panel -->
+    <div id="search-panel2" class="search-panel hidden">
+      <input type="text" id="search-input2" class="search-input" placeholder="Search buildings..." oninput="searchBuilding(2, this.value)" />
+      <div id="search-results2" class="search-results"></div>
+    </div>
+ 
+    <!-- Navigation Controls -->
+    <div class="nav-controls" id="nav-controls2">
+      <div class="control-row">
+        <label>From (Gate)</label>
+        <select id="start-gate2" onchange="updateRoute(2)">
+          <option value="">Select Starting Gate</option>
+          <option value="maingate">Main Gate</option>
+        </select>
+      </div>
+      <div class="control-row">
+        <label>To (Building)</label>
+        <select id="dest-building2" onchange="updateRoute(2)">
+          <option value="">Select Destination</option>
+          <option value="c2_admin">Administration Office</option>
+          <option value="c2_coe">College of Engineering</option>
+          <option value="c2_cit">College of Industrial Tech</option>
+          <option value="c2_lab">Science Laboratory</option>
+          <option value="c2_library">Library</option>
+          <option value="c2_gym">Sports Complex</option>
+          <option value="c2_canteen">Canteen</option>
+          <option value="c2_workshop">Workshop Area</option>
+          <option value="c2_clinic">Medical Clinic</option>
+          <option value="c2_faculty">Faculty Building</option>
+        </select>
+      </div>
+      <button class="btn-navigate" id="btn-nav2" onclick="startNavigation(2)" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22l10-5 10 5z"/></svg>
+        Navigate
+      </button>
+    </div>
+ 
+    <!-- Map Container Campus 2 -->
+    <div class="map-container" id="map2-container">
+      <div class="map-zoom-controls">
+        <button onclick="zoom(2, 1.2)">+</button>
+        <button onclick="zoom(2, 0.8)">−</button>
+        <button onclick="resetZoom(2)" title="Reset">⌂</button>
+      </div>
+      <div class="map-wrap" id="map2-wrap">
+        <svg id="campus2-map" viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        </svg>
+      </div>
+    </div>
+ 
+    <!-- Voice Guidance Box -->
+    <div class="voice-box hidden" id="voice-box2">
+      <div class="voice-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+      </div>
+      <p id="voice-text2">Ready to navigate.</p>
+    </div>
+ 
+    <!-- Building Info Popup -->
+    <div class="building-popup hidden" id="building-popup2">
+      <button class="popup-close" onclick="closePopup(2)">✕</button>
+      <div class="popup-icon">🏛️</div>
+      <h3 id="popup-name2">Building Name</h3>
+      <p id="popup-desc2">Building description</p>
+      <button class="btn-set-dest" onclick="setAsDestination(2)">Set as Destination</button>
+    </div>
+  </div>
+ 
+  <script src="script.js"></script>
+</body>
+</html>
