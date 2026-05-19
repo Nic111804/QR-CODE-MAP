@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NORSU Campus Navigation System</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- PAGE 1: WELCOME -->
+  <section id="page-welcome" class="page active">
+    <div class="bg-grid"></div>
+    <div class="scan-line"></div>
+    <div class="welcome-content">
+      <div class="logo-wrap">
+        <div class="logo-ring ring-1"></div>
+        <div class="logo-ring ring-2"></div>
+        <div class="logo-glow"></div>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Norsu_seal.png/200px-Norsu_seal.png"
+             onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex'"
+             alt="NORSU Logo" class="logo-img" id="logo-img"/>
+        <div id="logo-fallback" class="logo-fallback" style="display:none">
+          <span>NORSU</span>
+        </div>
+      </div>
+      <div class="title-block">
+        <p class="system-label">NAVIGATION SYSTEM</p>
+        <h1 class="school-name">NEGROS ORIENTAL<br/><span class="gold-accent">STATE UNIVERSITY</span></h1>
+        <p class="subtitle">CAMPUS WAYFINDING SYSTEM</p>
+      </div>
+      <button class="btn-continue" onclick="goTo('page-campus')">
+        <span class="btn-text">INITIALIZE NAVIGATION</span>
+        <span class="btn-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </button>
+      <p class="tagline">Select your campus · Plot your route · Navigate with confidence</p>
+    </div>
+    <div class="corner-deco tl"><span></span></div>
+    <div class="corner-deco tr"><span></span></div>
+    <div class="corner-deco bl"><span></span></div>
+    <div class="corner-deco br"><span></span></div>
+  </section>
+
+  <!-- PAGE 2: CAMPUS SELECTION -->
+  <section id="page-campus" class="page">
+    <div class="bg-grid"></div>
+    <div class="campus-header">
+      <button class="btn-back" onclick="goTo('page-welcome')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        BACK
+      </button>
+      <div class="header-center">
+        <p class="header-label">CAMPUS SELECTION</p>
+        <h2 class="page-title">Choose Your Campus</h2>
+        <p class="page-sub">Select a campus to begin navigation</p>
+      </div>
+    </div>
+    <div class="campus-cards">
+      <div class="campus-card" onclick="openCampus('campus1')">
+        <div class="card-accent-line"></div>
+        <div class="card-glow"></div>
+        <div class="card-icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="card-badge">CAMPUS 2</div>
+        <h3>Main Campus 2</h3>
+        <p>CCJE · CEA · CIT · STS<br/>Mechanical Eng. · Aviation</p>
+        <div class="card-footer">
+          <span>13 locations</span>
+          <div class="card-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="campus-card" onclick="openCampus('campus2')">
+        <div class="card-accent-line"></div>
+        <div class="card-glow"></div>
+        <div class="card-icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+          </svg>
+        </div>
+        <div class="card-badge">CAMPUS 1</div>
+        <h3>Main Campus 1</h3>
+        <p>CBA · CTHM · CAS · Admin<br/>CIT · CTED · Law · Grad School</p>
+        <div class="card-footer">
+          <span>20 locations</span>
+          <div class="card-arrow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: CAMPUS 1 MAP -->
+  <section id="page-map-campus1" class="page">
+    <div class="map-header">
+      <button class="btn-back small" onclick="goTo('page-campus')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        BACK
+      </button>
+      <div class="map-title-block">
+        <span class="map-campus-tag">CAMPUS 2</span>
+        <h2>Main Campus 2</h2>
+      </div>
+      <button class="btn-voice" id="voice-btn-1" onclick="toggleVoice(1)" title="Voice Guide">
+        <svg id="voice-icon-1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+      </button>
+    </div>
+
+    <!-- Navigation Control Panel -->
+    <div class="nav-control-panel" id="nav-panel-1">
+      <div class="nav-row">
+        <div class="nav-field">
+          <label class="nav-label">
+            <span class="dot green"></span> START POINT
+          </label>
+          <select id="start-select-1" class="nav-select">
+            <option value="main-gate">📍 Main Gate</option>
+            <option value="guard-house">🏠 Guard House</option>
+            <option value="open-field">🌿 Open Field / Stage</option>
+            <option value="cea">🏛️ CEA Building</option>
+            <option value="mech-eng">⚙️ Mechanical Engineering</option>
+            <option value="ccje-lower">⚖️ CCJE Building (Lower)</option>
+            <option value="ccje-upper">⚖️ CCJE Building (Upper)</option>
+            <option value="canteen">🍽️ Canteen</option>
+            <option value="cit">💻 CIT Building</option>
+            <option value="maritime">⚓ Old Maritime Building</option>
+            <option value="ccje-aviation">✈️ CCJE/P.E/Aviation Building</option>
+            <option value="sts">🔬 STS Building</option>
+            <option value="aviation-area">🛩️ Aviation Working Area</option>
+          </select>
+        </div>
+        <div class="swap-btn" onclick="swapLocations(1)" title="Swap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+        </div>
+        <div class="nav-field">
+          <label class="nav-label">
+            <span class="dot gold"></span> DESTINATION
+          </label>
+          <select id="dest-select-1" class="nav-select">
+            <option value="main-gate">📍 Main Gate</option>
+            <option value="guard-house">🏠 Guard House</option>
+            <option value="open-field">🌿 Open Field / Stage</option>
+            <option value="cea">🏛️ CEA Building</option>
+            <option value="mech-eng">⚙️ Mechanical Engineering</option>
+            <option value="ccje-lower">⚖️ CCJE Building (Lower)</option>
+            <option value="ccje-upper">⚖️ CCJE Building (Upper)</option>
+            <option value="canteen">🍽️ Canteen</option>
+            <option value="cit">💻 CIT Building</option>
+            <option value="maritime">⚓ Old Maritime Building</option>
+            <option value="ccje-aviation">✈️ CCJE/P.E/Aviation Building</option>
+            <option value="sts">🔬 STS Building</option>
+            <option value="aviation-area">🛩️ Aviation Working Area</option>
+          </select>
+        </div>
+        <div class="nav-actions">
+          <button class="btn-navigate" onclick="navigate(1)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            NAVIGATE
+          </button>
+          <button class="btn-reset" onclick="resetRoute(1)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-layout">
+      <div class="map-container" id="map-container-1">
+        <div class="map-loading" id="map-load-1">
+          <div class="loader-ring"></div>
+          <span>RENDERING MAP…</span>
+        </div>
+        <div class="map-wrap" id="map-wrap-1">
+          <img src="Mc2MAP.png"
+               onerror="this.src=''"
+               alt="NORSU Main Campus 1 Map"
+               class="campus-map-img" id="campus1-img" />
+          <svg class="route-svg" id="route-svg-1" viewBox="0 0 1040 880" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <filter id="glow1" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow1-soft" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#FFD700" opacity="0.9"/>
+              </marker>
+              <linearGradient id="routeGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.6"/>
+                <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1"/>
+              </linearGradient>
+            </defs>
+            <!-- Route shadow for depth -->
+            <path id="route-shadow-1" d="" stroke="#000" stroke-width="9" fill="none" opacity="0.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Main route path -->
+            <path id="route-path-1" d="" stroke="url(#routeGrad1)" stroke-width="6" fill="none"
+                  filter="url(#glow1-soft)" stroke-dasharray="14,7" stroke-linecap="round" stroke-linejoin="round"
+                  marker-end="url(#arrow1)" class="animated-route"/>
+            <!-- Destination pulse rings -->
+            <circle id="dest-ring-1" cx="-99" cy="-99" r="22" fill="none" stroke="#FFD700" stroke-width="2" opacity="0" class="pulse-ring"/>
+            <circle id="dest-marker-1" cx="-99" cy="-99" r="10" fill="#FFD700" opacity="0.95" filter="url(#glow1)" class="pulse-dot"/>
+            <!-- Start marker -->
+            <circle id="start-ring-1" cx="-99" cy="-99" r="16" fill="none" stroke="#00FF88" stroke-width="2" opacity="0" class="pulse-ring-green"/>
+            <circle id="start-marker-1" cx="-99" cy="-99" r="7" fill="#00FF88" filter="url(#glow1)"/>
+            <!-- Labels -->
+            <text id="start-label-1" x="-99" y="-99" class="marker-label start-label" text-anchor="middle"></text>
+            <text id="dest-label-1" x="-99" y="-99" class="marker-label dest-label" text-anchor="middle"></text>
+          </svg>
+        </div>
+        <!-- Directions panel -->
+        <div class="directions-panel" id="dir-panel-1">
+          <div class="dir-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            TURN-BY-TURN DIRECTIONS
+            <span class="dir-dist" id="dir-dist-1"></span>
+          </div>
+          <div class="dir-steps" id="dir-steps-1">
+            <div class="dir-placeholder">Select a start point and destination, then tap NAVIGATE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4: CAMPUS 2 MAP -->
+  <section id="page-map-campus2" class="page">
+    <div class="map-header">
+      <button class="btn-back small" onclick="goTo('page-campus')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        BACK
+      </button>
+      <div class="map-title-block">
+        <span class="map-campus-tag">CAMPUS 1</span>
+        <h2>Main Campus 1</h2>
+      </div>
+      <button class="btn-voice" id="voice-btn-2" onclick="toggleVoice(2)" title="Voice Guide">
+        <svg id="voice-icon-2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+      </button>
+    </div>
+
+    <!-- Navigation Control Panel -->
+    <div class="nav-control-panel" id="nav-panel-2">
+      <div class="nav-row">
+        <div class="nav-field">
+          <label class="nav-label">
+            <span class="dot green"></span> START POINT
+          </label>
+          <select id="start-select-2" class="nav-select">
+            <option value="gate1">📍 Gate 1</option>
+            <option value="gate2">🚪 Gate 2</option>
+            <option value="gate3">🚪 Gate 3</option>
+            <option value="gate4">🚪 Gate 4</option>
+            <option value="cba-cthm">💼 CBA & CTHM Building</option>
+            <option value="info-tech">🖥️ Info Tech Building</option>
+            <option value="cas">🎓 CAS Building</option>
+            <option value="norsu-complex">🏟️ Cultural & Sports Complex</option>
+            <option value="cnpahs">🏥 CNPAHS Building</option>
+            <option value="pe-bldg">🏃 P.E. Building</option>
+            <option value="automotive">🔧 Automotive Building</option>
+            <option value="admin">🏛️ Admin Building</option>
+            <option value="canteen2">🍽️ Canteen</option>
+            <option value="cit2">💻 CIT Building</option>
+            <option value="supply">📦 Supply Office</option>
+            <option value="sao">📋 SAO Building</option>
+            <option value="care-center">❤️ Care Center</option>
+            <option value="cted">📚 CTED Building</option>
+            <option value="law">⚖️ Law Building</option>
+            <option value="grad-school">🎓 Graduate School</option>
+          </select>
+        </div>
+        <div class="swap-btn" onclick="swapLocations(2)" title="Swap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+        </div>
+        <div class="nav-field">
+          <label class="nav-label">
+            <span class="dot gold"></span> DESTINATION
+          </label>
+          <select id="dest-select-2" class="nav-select">
+            <option value="gate1">📍 Gate 1</option>
+            <option value="gate2">🚪 Gate 2</option>
+            <option value="gate3">🚪 Gate 3</option>
+            <option value="gate4">🚪 Gate 4</option>
+            <option value="cba-cthm">💼 CBA & CTHM Building</option>
+            <option value="info-tech">🖥️ Info Tech Building</option>
+            <option value="cas">🎓 CAS Building</option>
+            <option value="norsu-complex">🏟️ Cultural & Sports Complex</option>
+            <option value="cnpahs">🏥 CNPAHS Building</option>
+            <option value="pe-bldg">🏃 P.E. Building</option>
+            <option value="automotive">🔧 Automotive Building</option>
+            <option value="admin">🏛️ Admin Building</option>
+            <option value="canteen2">🍽️ Canteen</option>
+            <option value="cit2">💻 CIT Building</option>
+            <option value="supply">📦 Supply Office</option>
+            <option value="sao">📋 SAO Building</option>
+            <option value="care-center">❤️ Care Center</option>
+            <option value="cted">📚 CTED Building</option>
+            <option value="law">⚖️ Law Building</option>
+            <option value="grad-school">🎓 Graduate School</option>
+          </select>
+        </div>
+        <div class="nav-actions">
+          <button class="btn-navigate" onclick="navigate(2)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            NAVIGATE
+          </button>
+          <button class="btn-reset" onclick="resetRoute(2)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-layout">
+      <div class="map-container" id="map-container-2">
+        <div class="map-loading" id="map-load-2">
+          <div class="loader-ring"></div>
+          <span>RENDERING MAP…</span>
+        </div>
+        <div class="map-wrap" id="map-wrap-2">
+          <img src="Mc1MAP.png"
+               onerror="this.src=''"
+               alt="NORSU Main Campus 2 Map"
+               class="campus-map-img" id="campus2-img" />
+          <svg class="route-svg" id="route-svg-2" viewBox="0 0 1320 880" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="glow2-soft" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#FFD700" opacity="0.9"/>
+              </marker>
+              <linearGradient id="routeGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.6"/>
+                <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1"/>
+              </linearGradient>
+            </defs>
+            <path id="route-shadow-2" d="" stroke="#000" stroke-width="9" fill="none" opacity="0.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path id="route-path-2" d="" stroke="url(#routeGrad2)" stroke-width="6" fill="none"
+                  filter="url(#glow2-soft)" stroke-dasharray="14,7" stroke-linecap="round" stroke-linejoin="round"
+                  marker-end="url(#arrow2)" class="animated-route"/>
+            <circle id="dest-ring-2" cx="-99" cy="-99" r="22" fill="none" stroke="#FFD700" stroke-width="2" opacity="0" class="pulse-ring"/>
+            <circle id="dest-marker-2" cx="-99" cy="-99" r="10" fill="#FFD700" opacity="0.95" filter="url(#glow2)" class="pulse-dot"/>
+            <circle id="start-ring-2" cx="-99" cy="-99" r="16" fill="none" stroke="#00FF88" stroke-width="2" opacity="0" class="pulse-ring-green"/>
+            <circle id="start-marker-2" cx="-99" cy="-99" r="7" fill="#00FF88" filter="url(#glow2)"/>
+            <text id="start-label-2" x="-99" y="-99" class="marker-label start-label" text-anchor="middle"></text>
+            <text id="dest-label-2" x="-99" y="-99" class="marker-label dest-label" text-anchor="middle"></text>
+          </svg>
+        </div>
+        <div class="directions-panel" id="dir-panel-2">
+          <div class="dir-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            TURN-BY-TURN DIRECTIONS
+            <span class="dir-dist" id="dir-dist-2"></span>
+          </div>
+          <div class="dir-steps" id="dir-steps-2">
+            <div class="dir-placeholder">Select a start point and destination, then tap NAVIGATE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
